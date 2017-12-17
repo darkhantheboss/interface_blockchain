@@ -85,6 +85,7 @@
                     </li>
                 {% endif %}
             </ul>
+          {% if request.user.is_authenticated %}
             <div class="nav-item my-3 my-lg-0">
                 User
                 <hr> {{ user.username }}
@@ -93,6 +94,7 @@
                 Balance
                 <hr> {{ user.balance }} Aid
             </div>
+          {% endif %}
         </div>
     </nav>
 

@@ -58,7 +58,7 @@ class Payment(models.Model):
             'recipient': self.transaction_payment.receiver.id,
             'rating': self.transaction_payment.get_full_rating(),
             'contract_id': self.transaction_payment.contract.id,
-            'amount': self.transaction_payment.contract.total_amount,
+            'amount': self.amount,
         }
         if self.transaction_payment.contract.responsibility_set.all() and self.transaction_payment.contract.responsibility_set.values_list(
             'product', flat=True):
@@ -67,4 +67,11 @@ class Payment(models.Model):
             data['product_id'] = 0
         requests.post('http://localhost:5000/transactions/new', data=data)
         requests.get('http://localhost:5000/mine')
+
+        sender = self.transaction_payment.sender
+        sender.balace -= self.amount
+        sender.save()
+        receiver = self.transaction_payment.receiver
+        receiver.balace += self.amount
+        receiver.save()
         super(Payment, self).save(*args, **kwargs)

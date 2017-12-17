@@ -84,7 +84,7 @@ class DealDetailView(LoginRequiredMixin, TemplateView):
         ctx = {}
         ctx['object'] = self.object
         ctx['responsibilities'] = self.object.contract.responsibility_set.all()
-        ctx['may_finish'] = self.object.contract.responsibility_set.filter(status__in=[0, 1]        ).count() == 0
+        ctx['may_finish'] = self.object.contract.responsibility_set.filter(status=0).count() == 0
         return ctx
 
     def post(self, request, *args, **kwargs):
