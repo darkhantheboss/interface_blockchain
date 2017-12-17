@@ -1,9 +1,9 @@
 {% load staticfiles %}
 <video width="100%" poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg" id="bgvid" playsinline
        autoplay muted loop>
-    <source src="{{MEDIA_URL}}/background.mp4" type="video/mp4">
+    <source src="{{STATIC_URL}}background.mp4" type="video/mp4">
 </video>
-<p><a href="{% url 'account_login' %}">Sign in {{MEDIA_URL}}</a>
+<p><a href="{% url 'account_login' %}">Sign in</a>
     <style>
         a {
             display: inline-block;
