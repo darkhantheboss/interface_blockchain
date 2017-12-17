@@ -40,10 +40,10 @@ class GoodCreateView(LoginRequiredMixin, CreateView):
         return render(request, self.template_name, self.get_context_data(request))
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             self.object = form.save()
-            return HttpResponseRedirect(reverse('users:list'))
+            return HttpResponseRedirect(reverse('users:smart_contract'))
         else:
             messages.error(request, u'Произошла ошибка!')
             return super(GoodCreateView, self).get(request, *args, **kwargs)

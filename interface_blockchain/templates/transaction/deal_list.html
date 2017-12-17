@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" style="background: DarkSlateGray ;">
+      <hr>
+      <div>
+        <h2 style="display: inline-block">Deals</h2>
+        <a class="btn btn-danger" style="display: inline-block"
+           href="{% url 'transaction:create_deal' %}">Create Deal</a>
+        <hr>
+      </div>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Deal</th>
+          <th>Sender</th>
+          <th>Receiver</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for deal in object_list %}
+        <tr>
+          <td>
+            <a href="{% url 'transaction:deal_detail' pk=deal.id %}">{{ deal.contract.name }}</a>
+          </td>
+          <td>{{ deal.sender.email }}</td>
+          <td>{{ deal.receiver.email }}</td>
+          <td>{{ deal.get_status_display }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  {% endblock %}

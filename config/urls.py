@@ -15,7 +15,7 @@ urlpatterns = [
     # User management
     url(r'^users/', include('interface_blockchain.users.urls', namespace='users')),
     url(r'^product/', include('interface_blockchain.product.urls', namespace='product')),
-    url(r'^transaction/', include('interface_blockchain.product.urls', namespace='transaction')),
+    url(r'^transaction/', include('interface_blockchain.transaction.urls', namespace='transaction')),
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here

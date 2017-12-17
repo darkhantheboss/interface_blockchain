@@ -1,5 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
+import requests
 
 from django.db import models
 from interface_blockchain.users.models import Contract, User
@@ -20,12 +21,15 @@ class TransactionContract(models.Model):
     completed_date = models.DateTimeField(blank=True, null=True)
     sender = models.ForeignKey(User, related_name='sender')
     receiver = models.ForeignKey(User, related_name='receiver')
-    rating_customer = models.PositiveIntegerField()
-    rating_responsibilities = models.PositiveIntegerField()
+    rating_customer = models.PositiveIntegerField(blank=True, null=True)
+    rating_responsibilities = models.PositiveIntegerField(blank=True, null=True)
     review = models.TextField(max_length=255, blank=True, null=True)
 
+    def get_full_rating(self):
+        return self.rating_responsibilities / 10 * 0.7 + 0.3 * self.rating_customer / 10
+
     def get_status_display(self):
-        return self.STATUSES_CONF[self.status]
+        return self.STATUSES_CONF[self.status][1]
 
     def __str__(self):
         return self.contract.name
@@ -43,7 +47,24 @@ class Payment(models.Model):
     status = models.IntegerField(choices=STATUSES_CONF, default=PROCESSING_STATUS)
 
     def get_status_display(self):
-        return self.STATUSES_CONF[self.status]
+        return self.STATUSES_CONF[self.status][1]
 
     def __str__(self):
         return self.id
+
+    def save(self, *args, **kwargs):
+        data = {
+            'sender': self.transaction_payment.sender.id,
+            'recipient': self.transaction_payment.receiver.id,
+            'rating': self.transaction_payment.get_full_rating(),
+            'contract_id': self.transaction_payment.contract.id,
+            'amount': self.transaction_payment.contract.total_amount,
+        }
+        if self.transaction_payment.contract.responsibility_set.all() and self.transaction_payment.contract.responsibility_set.values_list(
+            'product', flat=True):
+            data['product_id'] = self.transaction_payment.contract.responsibility_set.first().product_set.first().id
+        else:
+            data['product_id'] = 0
+        requests.post('http://localhost:5000/transactions/new', data=data)
+        requests.get('http://localhost:5000/mine')
+        super(Payment, self).save(*args, **kwargs)

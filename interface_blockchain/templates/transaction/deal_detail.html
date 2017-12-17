@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" style="background: DarkSlateGray ;">
+      <hr>
+      <div>
+        <h2 style="display: inline-block">Deal {{ object.id }}</h2>
+        <hr>
+      </div>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Responsibility</th>
+          <th>Amount of goods</th>
+          <th>Good</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in responsibilities %}
+        <tr>
+          <td>{{ r.name }}</td>
+          <td>{% for product in r.product_set.all %}{{ product.amount }} ,{% endfor %}</td>
+          <td>{% for product in r.product_set.all %}{{ product.good.name }} ,{%endfor %}</td>
+          <td>{{ r.get_status_display }}</td>
+          <td>{%if r.status == 0 %}<a href="{% url 'transaction:deal_detail' pk=object.id %}?completed={{r.id}}">Закончено</a>{%endif%}
+          </td>
+          <td>
+          <td>{%if r.status == 0 %}<a href="{% url 'transaction:deal_detail' pk=object.id %}?uncompleted={{r.id}}">Uncompleted</a>{%endif%}
+          </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% if may_finish %}
+      <form action="." method="POST">
+        {% csrf_token %}
+        <h3>Rating</h3>
+        <input type="text" name="rating">
+        <h3>Comment</h3>
+        <input type="text" name="comment">
+        <input type="submit" value="Отправить">
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+
+  {% endblock %}

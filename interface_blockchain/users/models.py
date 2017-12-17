@@ -44,7 +44,7 @@ class Responsibility(models.Model):
     status = models.IntegerField(choices=STATUSES_CONF, default=PROCESSING_STATUS)
 
     def get_status_display(self):
-        return self.STATUSES_CONF[self.status]
+        return self.STATUSES_CONF[self.status][1]
 
     def __str__(self):
         return self.name

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static crispy_forms_tags %}
+
+{% block title %}User: {{ request.user.username }}{% endblock %}
+
+{% block content %}
+    {% include "../users/base_create.html" %}
+{% endblock content %}
+

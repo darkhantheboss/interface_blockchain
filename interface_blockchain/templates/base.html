@@ -59,10 +59,16 @@
 {#                           href="{% url 'users:detail' request.user.username %}">{% trans "My Profile" %}</a>#}
 {#                    </li>#}
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'transaction:deals' %}">Deals</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:smart_contract' %}">Smart Contracts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'product:goods' %}">All Goods</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'transaction:chains' %}">Coin Explorer</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
