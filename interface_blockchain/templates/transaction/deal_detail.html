@@ -26,10 +26,10 @@
           <td>{% for product in r.product_set.all %}{{ product.amount }} ,{% endfor %}</td>
           <td>{% for product in r.product_set.all %}{{ product.good.name }} ,{%endfor %}</td>
           <td>{{ r.get_status_display }}</td>
-          <td>{%if r.status == 0 %}<a href="{% url 'transaction:deal_detail' pk=object.id %}?completed={{r.id}}">Закончено</a>{%endif%}
+          <td>{%if r.status == 0 and may_check %}<a href="{% url 'transaction:deal_detail' pk=object.id %}?completed={{r.id}}">Закончено</a>{%endif%}
           </td>
           <td>
-          <td>{%if r.status == 0 %}<a href="{% url 'transaction:deal_detail' pk=object.id %}?uncompleted={{r.id}}">Uncompleted</a>{%endif%}
+          <td>{%if r.status == 0 and may_check %}<a href="{% url 'transaction:deal_detail' pk=object.id %}?uncompleted={{r.id}}">Uncompleted</a>{%endif%}
           </td>
         </tr>
         {% endfor %}

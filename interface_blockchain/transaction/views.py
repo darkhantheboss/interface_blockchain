@@ -65,9 +65,11 @@ class DealCreateView(LoginRequiredMixin, CreateView):
 class DealDetailView(LoginRequiredMixin, TemplateView):
     model = TransactionContract
     template_name = 'transaction/deal_detail.html'
+    user = None
 
     def get(self, request, *args, **kwargs):
         completed = request.GET.get('completed', None)
+        self.user = request.user
         if completed:
             r = Responsibility.objects.get(id=int(completed))
             r.status = 1
@@ -84,6 +86,7 @@ class DealDetailView(LoginRequiredMixin, TemplateView):
         ctx = {}
         ctx['object'] = self.object
         ctx['responsibilities'] = self.object.contract.responsibility_set.all()
+        ctx['may_check'] = self.object.sender != self.user
         ctx['may_finish'] = self.object.contract.responsibility_set.filter(status=0).count() == 0
         return ctx
 

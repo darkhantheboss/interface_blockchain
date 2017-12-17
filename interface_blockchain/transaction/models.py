@@ -69,9 +69,9 @@ class Payment(models.Model):
         requests.get('http://localhost:5000/mine')
 
         sender = self.transaction_payment.sender
-        sender.balace -= self.amount
+        sender.balance -= self.amount
         sender.save()
         receiver = self.transaction_payment.receiver
-        receiver.balace += self.amount
+        receiver.balance += self.amount
         receiver.save()
         super(Payment, self).save(*args, **kwargs)
