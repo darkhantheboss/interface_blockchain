@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 import requests
-
+import json
 from django.db import models
 from interface_blockchain.users.models import Contract, User
 from django.utils.translation import ugettext_lazy as _
@@ -65,7 +65,7 @@ class Payment(models.Model):
             data['product_id'] = self.transaction_payment.contract.responsibility_set.first().product_set.first().id
         else:
             data['product_id'] = 0
-        requests.post('http://localhost:5000/transactions/new', data=data)
+        requests.post('http://localhost:5000/transactions/new', data=json.dumps(data))
         requests.get('http://localhost:5000/mine')
 
         sender = self.transaction_payment.sender
