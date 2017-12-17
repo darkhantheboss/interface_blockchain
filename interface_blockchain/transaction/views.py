@@ -22,7 +22,7 @@ class ChainListView(LoginRequiredMixin, TemplateView):
 
     def get(self, request):
         ctx = {}
-        r = requests.get('http://localhost:5000/chain')
+        r = requests.get('http://94.247.130.84/api/chain')
         return HttpResponse(json.dumps(r.json(), sort_keys=True, indent=4), content_type="application/json")
 
 

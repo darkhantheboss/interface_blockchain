@@ -65,8 +65,8 @@ class Payment(models.Model):
             data['product_id'] = self.transaction_payment.contract.responsibility_set.first().product_set.first().id
         else:
             data['product_id'] = 0
-        requests.post('http://localhost:5000/transactions/new', data=json.dumps(data))
-        requests.get('http://localhost:5000/mine')
+        requests.post('http://94.247.130.84/api/transactions/new', data=json.dumps(data))
+        requests.get('http://94.247.130.84/api/mine')
 
         sender = self.transaction_payment.sender
         sender.balance -= self.amount
