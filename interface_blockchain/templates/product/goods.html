@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static crispy_forms_tags %}
+
+{% block title %}User: {{ request.user.username }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <hr>
+                {% for good in good_list %}
+                    <div class="col-sm-3"
+                         style="background: whitesmoke; color: #b94a48; height: 100%; border-radius: 2%; ;
+                                 display: inline-block; {% if good.image %} background-image: url({{ good.image.url }});
+                             background-size: cover;{% endif %}">
+                        <div class="txt"><h3>Name - {{ good.name }}</h3></div>
+                        <hr>
+                        <div class="txt"><h4>Options - {{ good.options }}</h4><br></div>
+                        <div class="txt"><h4>Description - {{ good.description }}</h4></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+

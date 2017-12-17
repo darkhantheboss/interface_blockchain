@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static crispy_forms_tags %}
+
+{% block title %}User: {{ request.user.username }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Update contract</h3>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" value="Send"/>
+                </form>
+                <br>
+                <div>
+                    <h2 style="display: inline-block">Product</h2>
+                    <a class="btn btn-danger" style="display: inline-block"
+                       href="{% url 'product:create_good' object.pk %}">Add Product</a>
+                    <hr>
+                </div>
+                {% for r in object.product_set.all %}
+                    <div class="col-sm-3"
+                         style="background: whitesmoke; color: #b94a48; height: 100%; border-radius: 2%; ;
+                                 display: inline-block; {% if good.image %} background-image: url({{ good.image.url }});
+                             background-size: cover;{% endif %}">
+                        <div class="txt"><h3>Good - {{ r.good.name }}</h3></div>
+                        <hr>
+                        <div class="txt"><h4>Amount - {{ r.amount }}</h4><br></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+

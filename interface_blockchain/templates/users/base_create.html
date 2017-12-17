@@ -1,0 +1,11 @@
+{% load crispy_forms_tags  %}
+<div class="row">
+    <div class="col-sm-12">
+        <h3>{% block create_title %}{% endblock %}</h3>
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Send"/>
+        </form>
+    </div>
+</div>

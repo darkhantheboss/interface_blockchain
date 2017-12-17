@@ -1,0 +1,36 @@
+<video width="100%" poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg" id="bgvid" playsinline
+       autoplay muted loop>
+    <source src="/static/background.mp4" type="video/mp4">
+</video>
+<p><a href="{% url 'account_login' %}">Sign in</a>
+    <style>
+        a {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            margin-left: 50%;
+            margin-top: 25%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: .5rem;
+            transition: .6s background;
+        }
+
+        a:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translateX(-50%) translateY(-50%);
+            background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
+            background-size: cover;
+            transition: 1s opacity;
+        }
+    </style>

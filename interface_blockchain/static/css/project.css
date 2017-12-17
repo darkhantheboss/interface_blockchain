@@ -1,0 +1,50 @@
+/* These styles are generated from project.scss. */
+body {
+  color: sandybrown;
+
+  background-color:cornflowerblue;
+}
+
+a {
+  color: darkorange;
+}
+
+.alert-debug {
+  color: black;
+  background-color: white;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+/* Display django-debug-toolbar.
+   See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
+   and https://github.com/pydanny/cookiecutter-django/issues/317
+*/
+[hidden][style="display: block;"] {
+  display: block !important;
+}
+
+#background {
+  background-image: url(/static/images/background-image.jpg);
+  height: 100vh;
+  background-size: cover;
+}
+
+.txt {
+  background: orangered;
+  color: antiquewhite;
+  border-radius: 5%;
+}
+
+.myclass {
+  display: inline-block;
+  background: red;
+  height: 70%;
+  vertical-align: top;
+  margin-top: 5%;;
+}

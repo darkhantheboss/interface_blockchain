@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ request.user.username }}{% endblock %}
+
+{% block content %}
+    {% include "./base_create.html" %}
+{% endblock %}

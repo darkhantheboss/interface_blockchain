@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static crispy_forms_tags %}
+
+{% block title %}User: {{ request.user.username }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                <div>
+                    <h2 style="display: inline-block">My smart contracts</h2>
+                    <a class="btn btn-danger" style="display: inline-block" href="{% url 'users:create_contract' %}">Add
+                        contract</a>
+                    <hr>
+                </div>
+                {% for contract in contract_list %}
+                    <div class="col-lg-3 myclass"
+                         style="background: whitesmoke; color: #b94a48; border-radius: 2%; display: inline-block; ">
+                        <h3>Name - {{ contract.name }}</h3>
+                        <hr>
+                        <h4>Sum - {{ contract.total_amount }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+
