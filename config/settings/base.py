@@ -274,4 +274,4 @@ ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
-ALLOWED_HOSTS = ['localhost', 'develop.er', 'http://94.247.130.84']
+ALLOWED_HOSTS = ['localhost', 'develop.er', 'http://94.247.130.84', '94.247.130.84']
